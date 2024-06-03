@@ -1,0 +1,130 @@
+.grid {
+  position: relative;
+ 
+  left: 1%;
+  gap: 500px;
+}
+
+.item {
+  position: absolute;
+  width: 90vw;
+  height: 100px;
+  line-height: auto;
+  margin: 10px;
+  border: 3px solid #808c9c; /* Valeur initiale conservée */
+  border-radius: 10px;
+  z-index: 1;
+  transition: all 0.3s ease-out;
+
+  &.muuri-item-hidden {
+    z-index: 0;
+  }
+
+  &.muuri-item-releasing {
+    z-index: 2;
+  }
+
+  &.muuri-item-dragging {
+    z-index: 3;
+  }
+  .lien{
+   
+    text-decoration: none;
+  }
+  &-content {
+    
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    position: relative;
+    width: 90vw;
+    height: 100px;
+    font-size: 30px;
+    color: #000; /* Utilisation de la variable */
+    overflow: hidden;
+    
+    transition: color 0.3s ease-in-out;
+    cursor: pointer;
+
+    .h{
+      position: absolute;
+      top: 25%;
+      left: 10%;
+      font-size: larger;
+      font-weight: bold;
+      text-align: center;
+      text-decoration: none;
+      font-size: 1em;
+      width: 300px;
+    }
+    
+    
+    .no {
+      position: relative;
+      top: 10%;
+      left: 5%;
+      display: inline-block;
+      height: 35px;
+      width: 100px;
+      grid-column: 1;
+      grid-row: 1;
+    }
+    .no1 {
+      position: relative;
+      top: 10%;
+      right: 50%;
+      width: 160px;
+      height: 33px;
+      grid-column: 2;
+      grid-row: 1;
+      text-align: center;
+      font-size: 30px;
+      font-family: "kanit";
+      border: 3px solid #919191; /* Utilisation de la variable */
+      border-radius: 10px;
+    }
+    .nb {
+      position: relative;
+      top: 10%;
+      left: 5%;
+      display: inline-block;
+      height: 35px;
+      width: 100px;
+      grid-column: 1;
+      grid-row: 2;
+    }
+    .nb1 {
+      position: relative;
+      top: 10%;
+      right: 50%;
+      width: 160px;
+      height: 33px;
+      grid-column: 2;
+      grid-row: 2;
+      text-align: center;
+      font-size: 30px;
+      font-family: "kanit";
+      border: 3px solid #919191; /* Utilisation de la variable */
+      border-radius: 10px;
+    }
+    
+  }
+
+  &:hover {
+    background: rgba($color: #808c9c, $alpha: .1);
+  }
+
+  &.muuri-item-dragging,
+  &.muuri-item-releasing {
+    background: #919191;
+    color: #000;
+  }
+
+  &.active {
+    .item-description {
+      display: block;
+      opacity: 1;
+    }
+  }
+}
+
