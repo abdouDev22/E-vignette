@@ -15,12 +15,16 @@ use App\Http\Controllers\PostController;
 |
 */
 
-
+Route::group(['middleware' => 'auth.custom'], function () {
+  Route::get('/vigetteObetnu',[BaseContent::class,'vigetteObetnu'])->name('vigetteObetnu');
+  Route::get('/achatVignette',[BaseContent::class,'achatVignette'])->name('achatVignette');
+  Route::get('/service',[BaseContent::class,'service'])->name('service');
+  Route::get('/profile',[BaseContent::class,'profile'])->name('profile');
+  Route::get('/vignette',[BaseContent::class,'vignette'])->name('vignette');
+});
 Route::get('/',[BaseContent::class,'index'])->name('base');
-Route::get('/vigetteObetnu',[BaseContent::class,'vigetteObetnu'])->name('vigetteObetnu');
-Route::get('/achatVignette',[BaseContent::class,'achatVignette'])->name('achatVignette');
-Route::get('/service',[BaseContent::class,'service'])->name('service');
-Route::get('/profile',[BaseContent::class,'profile'])->name('profile');
-Route::get('/vignette',[BaseContent::class,'vignette'])->name('vignette');
 
+Route::post('/login', [BaseContent::class, 'login'])->name('login');
+Route::get('/login', [BaseContent::class, 'login'])->name('login');
+Route::get('/logout', [BaseContent::class, 'logout']);
 Route::resource('posts', PostController::class);
