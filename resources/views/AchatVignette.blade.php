@@ -13,16 +13,18 @@
     <h1>Vignette Disponible</h1>
     <div class="grid">
 
-        <div class="item">
-          <a href="service" class="lien">
-            <div class="item-content">
-              
-              <span class="no1">2024</span>
-              <span class="nb">prix :</span>
-              <span class="nb1">10000</span>
-              </div>
-          </a>
-          </div>  
+      @foreach ($achatVignettes as $achatVignette )
+      <div class="item">
+        <a href="{{ route('service', ['id' => $voiture->id],['id' => $voiture->id]) }}" class="lien">
+          <div class="item-content">
+            
+            <span class="no1">{{$achatVignette->date}}</span>
+            <span class="nb">prix :</span>
+            <span class="nb1">{{$achatVignette->prix}}</span>
+            </div>
+        </a>
+        </div>  
+        @endforeach 
           
 
     </div>
@@ -32,9 +34,9 @@
   <div class="contenu">
       
       <a href="#" class="abou">Deconnexion</a>
-      <a href="/" class="abou active">Acceuille</a>
+      <a href="{{ route('welcome') }}" class="abou active">Acceuille</a>
       <a href="profile" class="abou">Profile</a>
-      <a href="achatVignette" class="abou">Achat de vignette</a>
+      <a href="{{ route('achatVignette') }}" class="abou">Achat de vignette</a>
   </div>
 
 

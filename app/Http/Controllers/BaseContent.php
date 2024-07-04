@@ -14,15 +14,57 @@ class BaseContent extends Controller
    function index(){
     return view('Auth.connexion');
    }
-   function vigetteObetnu(){
-      return view('vigetteObetnu');
+   function welcome(){
+    $userId = Auth::id();
+    $voitures = DB::table('voitures')
+      ->where('id_client', $userId)
+      ->select('id','matricule', 'chevaux')
+      ->get();
+    return View('welcome',compact('voitures'));
+   }
+   function vigetteObetnu($id_voiture){
+    $userId = Auth::id();
+        $achatVignettes = DB::table('achat')
+          ->where('id_client', $userId)
+          ->where('id_voiture', $id_voiture)
+          ->select('prix', 'Date')
+          ->get();
+      return view('vigetteObetnu',compact('achatVignettes'));
      }
      function achatVignette(){
-      $voitures = DB::select('select matricule,chevaux from voitures');
+        $userId = Auth::id();
+        $voitures = DB::table('voitures') 
+          ->where('id_client', $userId)
+          ->select('id','matricule', 'chevaux')
+          ->get();
       return view('voitureachat',compact('voitures'));
      }
-     function vignette(){
-      return view('achatvignette');
+     function vignette($id_voiture){
+        $userId = Auth::id();
+        $achatVignettes = DB::table('vignettes')
+        ->select('date','prix')
+        ->get();
+
+
+        $voitures = DB::table('voitures') 
+        ->where('id_client', $userId)
+        ->where('id', $id_voiture)
+        ->select('id','matricule', 'chevaux')
+        ->get();
+
+        if ($voitures->isNotEmpty()) {
+          foreach ($voitures as $voiture) {
+              $chevaux = $voiture->chevaux;
+      
+              foreach ($achatVignettes as $achatVignette) {
+                  if ($chevaux > 6) {
+                      $prix = $achatVignette->prix * 2;
+                      $achatVignette->prix = $prix;
+                  }
+              }
+          }
+      }
+        return view('achatvignette',compact('achatVignettes'));
      }
      function service(){
       return view('service');
@@ -44,7 +86,12 @@ class BaseContent extends Controller
             if ($user->email === $email && $user->password === $password) {
                 Auth::loginUsingId($user->id);
                 $valid=true;    
-                $voitures = DB::select('select matricule,chevaux from voitures');
+
+                $userId = Auth::id();
+                $voitures = DB::table('voitures')
+                  ->where('id_client', $userId)
+                  ->select('id','matricule', 'chevaux')
+                  ->get();
                 return View('Welcome',compact('voitures'));
             }
         }

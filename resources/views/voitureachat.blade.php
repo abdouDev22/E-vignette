@@ -16,7 +16,7 @@
         <div class="grid">
           @foreach ($voitures as $voiture )
             <div class="item">
-              <a href="vignette" class="lien">
+              <a href="{{ route('vignette', ['id' => $voiture->id]) }}" class="lien">
                 <div class="item-content">
                   <span class="no">No :</span>
                   <span class="no1">{{$voiture->matricule}}</span>
@@ -34,9 +34,9 @@
       <div class="contenu">
           
           <a href="#" class="abou">Deconnexion</a>
-          <a href="/" class="abou active">Acceuille</a>
+          <a href="{{ route('welcome') }}" class="abou active">Acceuille</a>
           <a href="profile" class="abou">Profile</a>
-          <a href="achatVignette" class="abou">Achat de vignette</a>
+          <a href="{{ route('achatVignette') }}" class="abou">Achat de vignette</a>
       </div>
 
         
