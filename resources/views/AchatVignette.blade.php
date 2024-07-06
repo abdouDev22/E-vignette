@@ -15,7 +15,7 @@
 
       @foreach ($achatVignettes as $achatVignette )
       <div class="item">
-        <a href="{{ route('service', ['id' => $voiture->id],['id' => $voiture->id]) }}" class="lien">
+        <a href="" class="lien">
           <div class="item-content">
             
             <span class="no1">{{$achatVignette->date}}</span>

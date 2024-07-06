@@ -1,8 +1,7 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BaseContent;
-use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -10,22 +9,23 @@ use App\Http\Controllers\PostController;
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
 |
 */
 
-Route::group(['middleware' => 'auth.custom'], function () {
-  Route::get('/vigetteObetnu/{id}',[BaseContent::class,'vigetteObetnu'])->name('vigetteObetnu');
-  Route::get('/achatVignette',[BaseContent::class,'achatVignette'])->name('achatVignette');
-  Route::get('/welcome',[BaseContent::class,'welcome'])->name('welcome');
-  Route::get('/service',[BaseContent::class,'service'])->name('service');
-  Route::get('/profile',[BaseContent::class,'profile'])->name('profile');
-  Route::get('/vignette/{id}',[BaseContent::class,'vignette'])->name('vignette');
+Route::get('/', function () {
+    return view('auth.login');
 });
-Route::get('/',[BaseContent::class,'index'])->name('base');
 
-Route::post('/login', [BaseContent::class, 'login'])->name('login');
-Route::get('/login', [BaseContent::class, 'login'])->name('login');
-Route::get('/logout', [BaseContent::class, 'logout'])->name('logout');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
