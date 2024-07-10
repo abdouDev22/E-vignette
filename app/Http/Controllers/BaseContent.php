@@ -8,12 +8,6 @@ use Illuminate\Http\Request;
 
 class BaseContent extends Controller
 {
-   protected $valid=false;
-
-
-   function index(){
-    return view('Auth.connexion');
-   }
    function welcome(){
     $userId = Auth::id();
     $voitures = DB::table('voitures')
@@ -66,43 +60,18 @@ class BaseContent extends Controller
       }
         return view('achatvignette',compact('achatVignettes'));
      }
-     function service(){
-      return view('service');
+     function service($id_voiture){
+      $userId = Auth::id();
+
+      $voitures = DB::table('voitures') 
+        ->where('id_client', $userId)
+        ->where('id', $id_voiture)
+        ->select('id','matricule', 'chevaux')
+        ->get();
+
+      return view('service',compact('voitures'));
      }
      function profile(){
       return view('profile');
      }
-
-
-
-     public function login(Request $request)
-    {
-     
-      $email = request('email');
-      $password = request('password');
-      $users = DB::select("select id,email,password from users");
-      $valid=false;
-        foreach ($users as $user) {
-            if ($user->email === $email && $user->password === $password) {
-                Auth::loginUsingId($user->id);
-                $valid=true;    
-
-                $userId = Auth::id();
-                $voitures = DB::table('voitures')
-                  ->where('id_client', $userId)
-                  ->select('id','matricule', 'chevaux')
-                  ->get();
-                return View('Welcome',compact('voitures'));
-            }
-        }
-        
-        return view('auth.connexion')->with('valid', $valid);
-    }
-
-
-    public function logout()
-    {
-        Auth::logout();
-        return redirect('/');
-    }
 }
