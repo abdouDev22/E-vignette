@@ -23,7 +23,7 @@
           </a>
           </div>  
           <div class="item">
-            <a href="#" class="lien">
+            <a href="{{ route('codeqr', ['id' => $voiture,'id_vignette'=> $vignette]) }}" class="lien">
               <div class="item-content">
               <span class="h">Waafi</span>
                

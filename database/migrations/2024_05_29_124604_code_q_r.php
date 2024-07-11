@@ -14,10 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('codeQR', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('contenu');
             $table->string('boolean');
             $table->timestamps();
+           
         });
     }
 
