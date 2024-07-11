@@ -36,7 +36,7 @@ class BaseContent extends Controller
      function vignette($id_voiture){
         $userId = Auth::id();
         $achatVignettes = DB::table('vignettes')
-        ->select('date','prix')
+        ->select('id','date','prix')
         ->get();
 
 
@@ -58,9 +58,9 @@ class BaseContent extends Controller
               }
           }
       }
-        return view('achatvignette',compact('achatVignettes'));
+        return view('achatvignette',compact('achatVignettes'),compact('voitures'));
      }
-     function service($id_voiture){
+     function service($id_voiture,$id_vignette){
       $userId = Auth::id();
 
       $voitures = DB::table('voitures') 

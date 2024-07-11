@@ -31,7 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/vigetteObetnu/{id}',[BaseContent::class,'vigetteObetnu'])->name('vigetteObetnu');
     Route::get('/achatVignette',[BaseContent::class,'achatVignette'])->name('achatVignette');
     Route::get('/welcome',[BaseContent::class,'welcome'])->name('welcome');
-    Route::get('/service',[BaseContent::class,'service'])->name('service');
+    Route::get('/service/{id}/{id_vignette}',[BaseContent::class,'service'])->name('service');
     Route::get('/vignette/{id}',[BaseContent::class,'vignette'])->name('vignette');
 });
 

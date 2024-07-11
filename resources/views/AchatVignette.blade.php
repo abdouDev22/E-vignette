@@ -13,18 +13,19 @@
     <h1>Vignette Disponible</h1>
     <div class="grid">
 
-      @foreach ($achatVignettes as $achatVignette )
-      <div class="item">
-        <a href="{{ route('vignette', ['id' => $voiture->id], 'color' => $color) }}" class="lien">
-          <div class="item-content">
-            
-            <span class="no1">{{$achatVignette->date}}</span>
-            <span class="nb">prix :</span>
-            <span class="nb1">{{$achatVignette->prix}}</span>
-            </div>
-        </a>
-        </div>  
-        @endforeach 
+      @foreach ($achatVignettes as $achatVignette)
+<div class="item">
+  @foreach ($voitures as $voiture)
+  <a href="{{ route('service', ['id' => $voiture->id, 'id_vignette' => $achatVignette->id]) }}" class="lien">
+    <div class="item-content">
+      <span class="no1">{{ $achatVignette->date }}</span>
+      <span class="nb">prix :</span>
+      <span class="nb1">{{ $achatVignette->prix }}</span>
+    </div>
+  </a>
+  @endforeach
+</div>
+@endforeach
           
 
     </div>
