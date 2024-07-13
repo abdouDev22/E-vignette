@@ -68,12 +68,16 @@ class BaseContent extends Controller
         ->where('id', $id_voiture)
         ->select('id','matricule', 'chevaux')
         ->get();
+        
+        $mode_paiements = DB::table('mode_paiement') 
+        ->select('id','mode')
+        ->get();
 
       return view('service', ['voiture' => $id_voiture,
-      'vignette' => $id_vignette]);
+      'vignette' => $id_vignette],compact('mode_paiements'));
      }
 
-     function codeqr($id_voiture,$id_vignette){
+     function codeqr($id_voiture,$id_vignette,$id_mode){
       $userId = Auth::id();
 
       $voitures = DB::table('voitures') 

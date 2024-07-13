@@ -12,25 +12,22 @@
     <a class="sidebarbuuton a" href="#"></a>
     <h1>Choisir la vignette</h1>
     <div class="grid">
-
+      @foreach ($mode_paiements as $mode_paiement )
         <div class="item">
-          <a href="#" class="lien">
+          @if ($mode_paiement->mode == 'D-money')
+          <a href="#" class="lien" id="dmoney">
+            @else
+            <a href="{{ route('codeqr', ['id' => $voiture,'id_vignette'=> $vignette,'id_mode'=>$mode_paiement->id]) }}" class="lien">
+              @endif  
             <div class="item-content">
               
-              <span class="h">D-money</span>
+              <span class="h" id="dmoney">{{$mode_paiement->mode}}</span>
             
               </div>
           </a>
-          </div>  
-          <div class="item">
-            <a href="{{ route('codeqr', ['id' => $voiture,'id_vignette'=> $vignette]) }}" class="lien">
-              <div class="item-content">
-              <span class="h">Waafi</span>
-               
-                </div>
-            </a>
-            
-          </div>  
+          </div> 
+          @endforeach
+          
 
     </div>
 </div>
@@ -45,7 +42,11 @@
   </div>
   
 </div>
-
+<script>
+  const dmoney=document.querySelector("#dmoney").addEventListener('click',()=>{
+   alert("Dmoney n'est encore disponible")
+  })
+</script>
 
 
 <script src="https://cdn.jsdelivr.net/npm/muuri@0.9.5/dist/muuri.min.js"></script>
