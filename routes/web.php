@@ -35,7 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/service/{id}/{id_vignette}',[BaseContent::class,'service'])->name('service');
     Route::get('/vignette/{id}',[BaseContent::class,'vignette'])->name('vignette');
     Route::get('/codeqr/{id}/{id_vignette}/{id_mode}',[BaseContent::class,'codeqr'])->name('codeqr');
+    Route::post('/page_achat/{id}/{id_vignette}/{id_mode}', [BaseContent::class, 'page_achat'])->name('page_achat');
     Route::post('/generate-qr', [CodeQRController::class, 'generate']);
 });
-
 require __DIR__.'/auth.php';

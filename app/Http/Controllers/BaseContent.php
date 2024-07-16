@@ -80,17 +80,16 @@ class BaseContent extends Controller
      function codeqr($id_voiture,$id_vignette,$id_mode){
       $userId = Auth::id();
 
-      $voitures = DB::table('voitures') 
-        ->where('id_client', $userId)
-        ->where('id', $id_voiture)
-        ->select('id','matricule', 'chevaux')
-        ->get();
-
-      return view('service', ['voiture' => $id_voiture,
-      'vignette' => $id_vignette]);
+      return view('api.api_waafi_connexion', ['voiture' => $id_voiture,
+      'vignette' => $id_vignette,'id_mode'=>$id_mode]);
      }
 
      function profile(){
       return view('profile');
+     }
+
+     function page_achat($id_voiture,$id_vignette,$id_mode){
+      return view('api.api_waafi_affiche', ['voiture' => $id_voiture,
+      'vignette' => $id_vignette,'id_mode'=>$id_mode]);
      }
 }
