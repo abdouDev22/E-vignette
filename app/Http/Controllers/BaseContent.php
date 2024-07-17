@@ -85,59 +85,65 @@ class BaseContent extends Controller
      }
 
 
-     function page_achat(Request $request,$id_voiture,$id_vignette,$id_mode){
+     public function page_achat(Request $request, $id_voiture, $id_vignette, $id_mode)
+{
+    $userId = Auth::id();
+    $phone = $request->input('phone');
+    $password = $request->input('password');
 
-      $phone = request('phone');
-      $password = request('password');
-      
-      $solde = DB::table('api_waafi_1') 
+    $solde = DB::table('api_waafi_1')
         ->where('tel', $phone)
         ->where('password', $password)
-        ->select('solde')
-        ->get();
+        ->value('solde');
 
-
-
-      
-      
-        $achatVignettes = DB::table('vignettes')
-        ->select('id','date','prix')
+    $achatVignette = DB::table('vignettes')
         ->where('id', $id_vignette)
-        ->get();
+        ->first(['id', 'date', 'prix']);
 
-
-        $voitures = DB::table('voitures') 
+    $voiture = DB::table('voitures')
         ->where('id_client', $userId)
         ->where('id', $id_voiture)
-        ->select('id','matricule', 'chevaux')
-        ->get();
+        ->first(['id', 'matricule', 'chevaux']);
 
+    if ($voiture && $solde !== null && $achatVignette) {
+        $prix = $voiture->chevaux > 6 ? $achatVignette->prix * 2 : $achatVignette->prix;
 
-        if ($voitures->isNotEmpty() && $solde !== 0 && $achatVignettes->isNotEmpty()) {
-          foreach ($voitures as $voiture) {
-              $chevaux = $voiture->chevaux;
-      
-              foreach ($achatVignettes as $achatVignette) {
-                  if ($chevaux > 6) {
-                      $prix = $achatVignette->prix * 2;
-                      $achatVignette->prix = $prix;
-                  }
-              }
+        if ($solde >= $prix) {
+            DB::beginTransaction();
 
-          }
+            try {
+                DB::table('api_waafi_1')
+                    ->where('tel', $phone)
+                    ->where('password', $password)
+                    ->decrement('solde', $prix);
 
+                DB::table('achat')->insert([
+                    'Date' => now(),
+                    'prix' => $prix,
+                    'id_mode_paiement' => $id_mode,
+                    'id_voiture' => $id_voiture,
+                    'id_vignette' => $id_vignette,
+                    'id_code_q_r' => 1,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                    'id_client' => $userId
+                ]);
 
+                DB::commit();
+                return view('api.api_waafi_affiche', ['id_mode' => $id_mode]);
+            } catch (\Exception $e) {
+                DB::rollBack();
+                return view('api.api_waafi_connexion',['voiture' => $id_voiture,
+                'vignette' => $id_vignette,'id_mode'=>$id_mode])->with('error', 'Transaction failed');
+            }
+        } else {
+            return view('api.api_waafi_connexion',['voiture' => $id_voiture,
+            'vignette' => $id_vignette,'id_mode'=>$id_mode])->with('error', 'Insufficient balance');
+        }
+    } else {
+        return view('api.api_waafi_connexion',['voiture' => $id_voiture,
+        'vignette' => $id_vignette,'id_mode'=>$id_mode])->with('error', 'Invalid data');
+    }
+}
 
-          return view('api.api_waafi_affiche', ['id_mode'=>$id_mode]);
-
-      }else{
-        return view('api.api_waafi_connexion');
-      }
-
-
-
-
-
-     
-     }
 }
