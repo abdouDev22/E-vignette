@@ -16,10 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+// page login du site
 Route::get('/', function () {
     return view('auth.login');
 });
 
+// page d'accueille une fois connecter
 Route::get('/dashboard', [BaseContent::class, 'welcome'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -34,8 +37,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/welcome',[BaseContent::class,'welcome'])->name('welcome');
     Route::get('/service/{id}/{id_vignette}',[BaseContent::class,'service'])->name('service');
     Route::get('/vignette/{id}',[BaseContent::class,'vignette'])->name('vignette');
+
+    // route pour l'api_waafi
     Route::get('/codeqr/{id}/{id_vignette}/{id_mode}',[BaseContent::class,'codeqr'])->name('codeqr');
     Route::post('/page_achat/{id}/{id_vignette}/{id_mode}', [BaseContent::class, 'page_achat'])->name('page_achat');
+
+    // route pour les codeQr
     Route::post('/generate-qr', [CodeQRController::class, 'generate']);
 });
 require __DIR__.'/auth.php';

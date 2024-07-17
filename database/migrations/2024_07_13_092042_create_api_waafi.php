@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('api_waafi', function (Blueprint $table) {
+        Schema::create('api_waafi_1', function (Blueprint $table) {
             $table->id();
             $table->integer('tel');
             $table->integer('solde');
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('api_waafi');
+        Schema::dropIfExists('api_waafi_1');
     }
 };

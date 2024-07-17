@@ -84,12 +84,60 @@ class BaseContent extends Controller
       'vignette' => $id_vignette,'id_mode'=>$id_mode]);
      }
 
-     function profile(){
-      return view('profile');
-     }
 
-     function page_achat($id_voiture,$id_vignette,$id_mode){
-      return view('api.api_waafi_affiche', ['voiture' => $id_voiture,
-      'vignette' => $id_vignette,'id_mode'=>$id_mode]);
+     function page_achat(Request $request,$id_voiture,$id_vignette,$id_mode){
+
+      $phone = request('phone');
+      $password = request('password');
+      
+      $solde = DB::table('api_waafi_1') 
+        ->where('tel', $phone)
+        ->where('password', $password)
+        ->select('solde')
+        ->get();
+
+
+
+      
+      
+        $achatVignettes = DB::table('vignettes')
+        ->select('id','date','prix')
+        ->where('id', $id_vignette)
+        ->get();
+
+
+        $voitures = DB::table('voitures') 
+        ->where('id_client', $userId)
+        ->where('id', $id_voiture)
+        ->select('id','matricule', 'chevaux')
+        ->get();
+
+
+        if ($voitures->isNotEmpty() && $solde !== 0 && $achatVignettes->isNotEmpty()) {
+          foreach ($voitures as $voiture) {
+              $chevaux = $voiture->chevaux;
+      
+              foreach ($achatVignettes as $achatVignette) {
+                  if ($chevaux > 6) {
+                      $prix = $achatVignette->prix * 2;
+                      $achatVignette->prix = $prix;
+                  }
+              }
+
+          }
+
+
+
+          return view('api.api_waafi_affiche', ['id_mode'=>$id_mode]);
+
+      }else{
+        return view('api.api_waafi_connexion');
+      }
+
+
+
+
+
+     
      }
 }
