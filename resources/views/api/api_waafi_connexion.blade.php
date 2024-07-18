@@ -14,12 +14,18 @@
       @csrf
       <div class="form-group">
         <label for="phone">Téléphone:</label>
-        <input type="tel" id="phone" name="phone" required>
+        <input type="number" id="phone" name="phone" required>
       </div>
       <div class="form-group">
         <label for="password">Mot de Passe:</label>
         <input type="password" id="password"  name="password" required>
       </div>
+      @if(isset($error))
+    <div class="alert alert-danger">
+        {{ $error }}
+    </div>
+@endif
+
       <button type="submit">valider</button>
     </form>
   </div>

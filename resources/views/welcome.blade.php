@@ -15,7 +15,8 @@
         <div class="grid">
           @foreach ($voitures as $voiture )
             <div class="item">
-              <a href="{{ route('vigetteObetnu', ['id' => $voiture->id]) }}" class="lien">
+              <a href="{{ route('vignetteObtenue', ['voiture' => $voiture->id]) }}" class="lien">
+
                 <div class="item-content">
                   <span class="no">No :</span>
                   <span class="no1">{{$voiture->matricule}}</span>

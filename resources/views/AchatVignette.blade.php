@@ -15,15 +15,15 @@
 
       @foreach ($achatVignettes as $achatVignette)
 <div class="item">
-  @foreach ($voitures as $voiture)
-  <a href="{{ route('service', ['id' => $voiture->id, 'id_vignette' => $achatVignette->id]) }}" class="lien">
+  
+  <a href="{{ route('service', ['voiture' => $voiture->id, 'vignette' => $achatVignette->id]) }}" class="lien">
     <div class="item-content">
-      <span class="no1">{{ $achatVignette->date }}</span>
+      <span class="no1">{{ $achatVignette->date->format('Y') }}</span>
       <span class="nb">prix :</span>
       <span class="nb1">{{ $achatVignette->prix }}</span>
     </div>
   </a>
-  @endforeach
+
 </div>
 @endforeach
           

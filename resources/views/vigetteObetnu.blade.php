@@ -18,7 +18,7 @@
           <a href="vigetteObetnu" class="lien">
             <div class="item-content">
               
-              <span class="no1">{{$achatVignette->Date}}</span>
+              <span class="no1">{{$achatVignette->Date->format('d/m/Y')}}</span>
               <span class="nb">prix :</span>
               <span class="nb1">{{$achatVignette->prix}}</span>
               </div>
