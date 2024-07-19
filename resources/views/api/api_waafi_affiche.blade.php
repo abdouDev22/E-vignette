@@ -7,17 +7,18 @@
   <title>Document</title>
   @vite(['resources/scss/api_waafi_a.scss','resources/js/app.js'])
 </head>
+
 <body>
   <div class="content">
     <h3>Payment successful!</h3>
-    <h1>DJF 500.00</h1>
-    <p class="date">18.06.24</p>
+    <h1>DJF{{ $prix }}</h1>
+    <p class="date"> {{ $date }}</p>
     <div class="carreblack">
-      <p>Sender name <span>Abdourahman Abdillahi Abdi</span></p>
-      <p>Sender <span>25377320261</span> </p>
+      <p>Sender name <span>{{ $user_con_name }}</span></p>
+      <p>Sender <span>{{ $telephone }}</span> </p>
       <p>Merchant name  <span>E-vignette</span></p>
       <p>Merchant ID <span>12</span></p>
-      <p>Total  <span>DJF500.00</span></p>
+      <p>Total  <span>DJF{{ $prix }}</span></p>
     </div>
   </div>
 </body>

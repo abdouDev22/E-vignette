@@ -17,6 +17,9 @@ class BaseContent extends Controller
     protected $user;
     protected $vignetteService;
 
+
+    
+
     // Constantes pour le verrouillage du compte
     const MAX_FAILED_ATTEMPTS = 3;
     const LOCK_DURATION_MINUTES = 3;
@@ -103,32 +106,35 @@ class BaseContent extends Controller
 
         // Vérifie si le compte est verrouillé
         if ($this->vignetteService->isAccountLocked($user)) {
-            return $this->returnErrorView($voiture, $vignette, $modePaiement, __('messages.account_locked'));
+            return $this->returnErrorView($voiture, $vignette, $modePaiement, __('account_locked'));
         }
 
         // Valide la transaction
         if (!$this->vignetteService->isValidTransaction($user, $vignette, $voiture, $request->password)) {
             $this->vignetteService->incrementFailedAttempts($user);
-            return $this->returnErrorView($voiture, $vignette, $modePaiement, __('messages.invalid_credentials'));
+            return $this->returnErrorView($voiture, $vignette, $modePaiement, __('invalid_credentials'));
         }
 
         $prix = $this->vignetteService->calculatePrice($voiture, $vignette);
 
         // Vérifie si l'utilisateur a un solde suffisant
         if ($user->solde < $prix) {
-            return $this->returnErrorView($voiture, $vignette, $modePaiement, __('messages.insufficient_balance'));
+            return $this->returnErrorView($voiture, $vignette, $modePaiement, __('insufficient_balance'));
         }
-
         // Traite la transaction
         DB::beginTransaction();
         try {
             $this->vignetteService->processTransaction($user, $prix, $this->user->id, $voiture->id, $vignette->id, $modePaiement->id);
             DB::commit();
-            return view('api.api_waafi_affiche', ['id_mode' => $modePaiement->id]);
+            $user = ApiWaafi::where('tel', $request->phone)->first();
+            $user_con_name=$user->nom;
+            $telephone=$request->phone;
+
+            return view('api.api_waafi_affiche', ['id_mode' => $modePaiement->id, 'prix'=> $prix,'user_con_name' => $user_con_name, 'telephone'=> $telephone, 'date'=>now()->toDateString()]);
         } catch (\Exception $e) {
             DB::rollBack();
             \Log::error('La transaction a échoué: ' . $e->getMessage());
-            return $this->returnErrorView($voiture, $vignette, $modePaiement, __('messages.transaction_failed'));
+            return $this->returnErrorView($voiture, $vignette, $modePaiement, __('transaction_failed'));
         }
     }
 

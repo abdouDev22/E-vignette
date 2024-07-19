@@ -10,7 +10,7 @@
 <body>
   <h1>Welcome to Waafi</h1>
  <div class="form-container">
-    <form id="addForm" method="post" action="{{ route('page_achat',['id' => $voiture,'id_vignette'=> $vignette,'id_mode'=>$id_mode]) }}">
+    <form id="addForm" method="post" action="{{ route('page_achat', ['voiture' => $voiture, 'vignette' => $vignette, 'modePaiement' => $modePaiement]) }}">
       @csrf
       <div class="form-group">
         <label for="phone">Téléphone:</label>

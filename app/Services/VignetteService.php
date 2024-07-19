@@ -47,6 +47,15 @@ private function calculateAdjustedPrice($vignette, $voiture)
     return $basePrice + $adjustment;
 }
 
+public function calculatePrice(Voiture $voiture, Vignette $vignette)
+{
+    // Implement your price calculation logic here
+    // This is just a placeholder example
+    $basePrice = $vignette->prix;
+    $adjustment = $voiture->chevaux * 100; // Adjust price based on horsepower
+    return $basePrice + $adjustment;
+}
+
 
 
     public function processTransaction($user, $prix, $userId, $id_voiture, $id_vignette, $id_mode)

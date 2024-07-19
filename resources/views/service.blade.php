@@ -17,7 +17,7 @@
           @if ($mode_paiement->mode == 'D-money')
           <a href="#" class="lien" id="dmoney">
             @else
-            <a href="{{ route('codeqr', ['id' => $voiture,'id_vignette'=> $vignette,'id_mode'=>$mode_paiement->id]) }}" class="lien">
+            <a href="{{ route('codeqr', ['voiture' => $voiture, 'vignette' => $vignette, 'modePaiement' => $mode_paiement->id]) }}" class="lien">
               @endif  
             <div class="item-content">
               

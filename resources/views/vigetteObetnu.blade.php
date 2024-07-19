@@ -10,7 +10,7 @@
 <body>
   <div class="content1">
     <a class="sidebarbuuton a" href="#"></a>
-    <h1>Choisir la vignette</h1>
+    <h>Choisir la vignette</h>
     <div class="grid">
 
       @foreach ($achatVignettes as $achatVignette )
