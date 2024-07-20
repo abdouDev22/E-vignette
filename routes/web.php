@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BaseContent;
 use App\Http\Controllers\CodeQRController;
@@ -28,3 +30,15 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+Route::get('/verify-email', function () {
+    return view('auth.verify-email'); // Spécifiez le chemin correct
+})->name('verify-email');
+
+
+Route::get('/verify-code', [VerificationController::class, 'showForm'])->name('verify-code');
+Route::post('/verify-code', [VerificationController::class, 'verifyCode']);
+// Route pour renvoyer l'email de vérification
+Route::post('/verification/send', [VerificationController::class, 'resendVerificationEmail'])
+    ->name('verification.send');

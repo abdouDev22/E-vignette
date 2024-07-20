@@ -35,8 +35,12 @@ Route::middleware('guest')->group(function () {
                 ->name('password.store');
 });
 
+Route::get('/verify-email', function () {
+    return view('auth.verify-email'); // Spécifiez le chemin correct
+})->name('verify-email');
+
 Route::middleware('auth')->group(function () {
-    Route::get('verify-email', EmailVerificationPromptController::class)
+    Route::get('/verify-email', EmailVerificationPromptController::class)
                 ->name('verification.notice');
 
     Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)
