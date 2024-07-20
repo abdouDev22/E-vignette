@@ -1,0 +1,146 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.login-container {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  text-align: center;
+}
+
+.login-container h2 {
+  margin-bottom: 20px;
+  color: #333333;
+}
+
+.input-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #666666;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+
+.connexion {
+  position: relative;
+  display: inline-flex;
+  top: 12px;
+  right: 30px;
+  width: 110px;
+  height: 55px;
+  margin: 0 15px;
+  perspective: 1000px;
+
+  a {
+    font-size: 19px;
+    letter-spacing: 1px;
+    transform-style: preserve-3d;
+    transform: translateZ(-25px);
+    transition: transform 0.25s;
+    font-family: 'Montserrat', sans-serif;
+
+    &:before,
+    &:after {
+      position: absolute;
+      content: "Connexion";
+      height: 55px;
+      width: 110px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 5px solid black;
+      box-sizing: border-box;
+      border-radius: 5px;
+    }
+
+    &:before {
+      color: #fff;
+      background: #000;
+      transform: rotateY(0deg) translateZ(25px);
+    }
+
+    &:after {
+      color: #000;
+      transform: rotateX(90deg) translateZ(25px);
+    }
+
+    &:hover {
+      transform: translateZ(-25px) rotateX(-90deg);
+    }
+  }
+}
+
+.inscription{
+  position: relative;
+  display: inline-flex;
+  top: 12px;
+  left: 25px;
+  width: 110px;
+  height: 55px;
+  margin: 0 15px;
+  perspective: 1000px;
+
+  a {
+    font-size: 19px;
+    letter-spacing: 1px;
+    transform-style: preserve-3d;
+    transform: translateZ(-25px);
+    transition: transform 0.25s;
+    font-family: 'Montserrat', sans-serif;
+
+    &:before,
+    &:after {
+      position: absolute;
+      content: "inscription";
+      height: 55px;
+      width: 110px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 5px solid black;
+      box-sizing: border-box;
+      border-radius: 5px;
+    }
+
+    &:before {
+      color: #fff;
+      background: #000;
+      transform: rotateY(0deg) translateZ(25px);
+    }
+
+    &:after {
+      color: #000;
+      transform: rotateX(90deg) translateZ(25px);
+    }
+
+    &:hover {
+      transform: translateZ(-25px) rotateX(-90deg);
+    }
+  }
+}
+button {
+  all: unset;
+  display: inline-block;
+  cursor: pointer;
+}

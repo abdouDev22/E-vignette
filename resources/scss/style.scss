@@ -1,0 +1,63 @@
+@use 'grid';
+@use 'sidebare';
+body{
+  color: #1e1e1e;
+  background-color: #EEF1F0;
+}
+
+.content1{
+  position: absolute;
+  h1{
+    position: relative;
+    bottom: 80px;
+    left: 30vw;
+    font-size: 2em;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .item{
+    
+    &-content{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr;
+      .h{
+        left: 25%;
+      }
+      .no{
+        grid-column: 1;
+        grid-row: 1;
+      }
+      .no1{
+        grid-column: 1;
+        grid-row: 1;
+        right: 0;
+        left: 90px;
+      }
+      .nb{
+        grid-column: 2;
+        grid-row: 1;
+      }
+      .nb1{
+        grid-column: 2;
+        grid-row: 1;
+        right: 0;
+        left: 90px;
+      }
+    }
+  }
+}
+
+.link-button {
+  background: none;
+  border: none;
+  color: #fff;
+  
+  cursor: pointer;
+  font-size: inherit;
+  font-family: inherit;
+  padding: 0;
+  margin: 0;
+  
+}
