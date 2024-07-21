@@ -21,11 +21,13 @@ class VignetteService
     }
 
     public function incrementFailedAttempts($user)
-    {
+{
+    if ($user) {
         $user->increment('failed_attempts');
         $user->last_failed_attempt = now();
         $user->save();
     }
+}
 
     public function adjustPrices($vignettes, $voiture)
 {
