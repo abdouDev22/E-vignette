@@ -9,11 +9,13 @@
     @vite(['resources/scss/style.scss','resources/js/app.js'])
 </head>
 <body>
+  
     <div class="content1">
         <a class="sidebarbuuton a" href="#"></a>
+
         <h1>Choisir la voiture</h1>
         <div class="grid">
-          @foreach ($voitures as $voiture )
+          @foreach ($voitures as $voiture)
             <div class="item">
               <a href="{{ route('vignetteObtenue', ['voiture' => $voiture->id]) }}" class="lien">
 
@@ -40,7 +42,7 @@
         </a>
         
           <a href="{{ route('welcome') }}" class="abou active">Acceuille</a>
-          <a href="profile" class="abou">Profile</a>
+          <a href="{{ route('profile.edit') }}" class="abou">Profile</a>
           <a href="{{ route('achatVignette') }}" class="abou">Achat de vignette</a>
       </div>
 

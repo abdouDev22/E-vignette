@@ -8,8 +8,10 @@
   @vite(['resources/scss/api_waafi_c.scss','resources/js/app.js'])
 </head>
 <body>
+  <a href="{{ route('service', ['voiture' => $voiture->id, 'vignette' => $vignette->id]) }}" class="home">retour</a>
   <h1>Welcome to Waafi</h1>
  <div class="form-container">
+ 
     <form id="addForm" method="post" action="{{ route('page_achat', ['voiture' => $voiture, 'vignette' => $vignette, 'modePaiement' => $modePaiement]) }}">
       @csrf
       <div class="form-group">

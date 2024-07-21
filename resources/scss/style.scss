@@ -5,11 +5,31 @@ body{
   background-color: #EEF1F0;
 }
 
+.home{
+  position: absolute;
+  top: 20%;
+  left: 10%;
+  background-color: rgb(107, 111, 111);
+  padding: 10px 20px; /* Add padding to make it look like a button */
+  color: white; /* Set the text color */
+  text-decoration: none; /* Remove underline */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Optionally, add rounded corners */
+  display: inline-block; /* Make it behave like an inline-block element */
+  text-align: center; /* Center the text */
+  cursor: pointer;
+  transition: 0.5s;
+  z-index: 1;
+
+  &:hover{
+    background-color: rgb(50, 50, 50);
+  }
+}
+
 .content1{
   position: absolute;
   h1{
     position: relative;
-    bottom: 80px;
     left: 30vw;
     font-size: 2em;
   }

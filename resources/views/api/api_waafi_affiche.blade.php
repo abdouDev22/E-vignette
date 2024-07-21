@@ -10,6 +10,7 @@
 
 <body>
   <div class="content">
+    <a href="/welcome" class="home">Home</a>
     <h3>Payment successful!</h3>
     <h1>DJF{{ $prix }}</h1>
     <p class="date"> {{ $date }}</p>
