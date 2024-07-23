@@ -1,52 +1,11 @@
-/node_modules
-/npm-debug.log
-/yarn-error.log
-/pnpm-debug.log
-/pnpm-lock.yaml
-yarn.lock
-package-lock.json
 
-/vendor
-/.env
-.phpunit.result.cache
-Homestead.yaml
-Homestead.json
-/.vagrant
-
+/public/build
+/public/hot
 /public/storage
 /storage/*.key
+
+
+
+/.fleet
 /.idea
 /.vscode
-/.phpunit.result.cache
-/.env.backup
-/.env.local
-/.env.testing
-
-# Laravel 5 & 6
-/public/hot
-/public/build
-/storage/*.key
-/vendor
-
-# Laravel 7+
-/bootstrap/cache/*
-
-# Ignorer tous les fichiers logs
-/storage/logs/*
-!storage/logs/.gitignore
-
-# Ignorer toutes les données générées par cache
-/storage/framework/cache/*
-!storage/framework/cache/.gitignore
-
-# Ignorer toutes les sessions
-/storage/framework/sessions/*
-!storage/framework/sessions/.gitignore
-
-# Ignorer toutes les vues compilées
-/storage/framework/views/*
-!storage/framework/views/.gitignore
-
-# Ignorer les fichiers de test et de coverage
-/tests/coverage/
-
