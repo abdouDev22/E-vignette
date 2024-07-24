@@ -42,21 +42,28 @@ class BaseContent extends Controller
     public function welcome()
     {
         $voitures = Voiture::where('id_client', $this->user->id)
-            ->select('id', 'matricule', 'chevaux')
+            ->select('id', 'matricule', 'chevaux','marque','type')
             ->get();
         return view('welcome', compact('voitures'));
     }
 
-    /**
+     /**
      * Affiche les vignettes obtenues pour un véhicule spécifique
      */
     public function vignetteObtenue(Voiture $voiture)
     {
-        $achatVignettes = Achat::where('id_client', $this->user->id)
+        // Récupérer l'utilisateur authentifié
+        $user = Auth::user();
+
+        // Récupérer les achats de vignettes pour l'utilisateur et le véhicule spécifique
+        $achatVignettes = Achat::where('id_client', $user->id)
             ->where('id_voiture', $voiture->id)
-            ->select('prix', 'Date')
+            ->with('vignette', 'modePaiement') // Charger les relations
+            ->select('prix', 'Date', 'id_vignette', 'id_mode_paiement')
             ->get();
-        return view('vigetteObetnu', compact('achatVignettes'));
+
+        // Retourner la vue avec les données des achats de vignettes et les informations du véhicule
+        return view('vigetteObetnu', compact('achatVignettes', 'voiture'));
     }
 
     /**
@@ -65,7 +72,7 @@ class BaseContent extends Controller
     public function achatVignette()
     {
         $voitures = Voiture::where('id_client', $this->user->id)
-            ->select('id', 'matricule', 'chevaux')
+        ->select('id', 'matricule', 'chevaux','marque','type')
             ->get();
         return view('voitureachat', compact('voitures'));
     }
