@@ -82,7 +82,7 @@
                             <img src="{{ asset('img/dmoney.png') }}" alt="D-money" class="payment-icon animate__animated animate__pulse animate__infinite">
                             <h2 class="payment-title mb-4">D-money</h2>
                             <p class="payment-text mb-4">Paiement rapide et sécurisé avec D-money</p>
-                            <a href="{{ route('codeqr', ['voiture' => $voiture, 'vignette' => $vignette, 'modePaiement' => $mode_paiement->id]) }}" class="btn btn-light btn-lg">Choisir {{ $mode_paiement->mode }}</a>
+                            <a href="#" class="btn btn-light btn-lg" id="dmoney">Choisir {{ $mode_paiement->mode }}</a>
                         @else
                             <img src="{{ asset('img/waafi.png') }}" alt="Waafi" class="payment-icon animate__animated animate__pulse animate__infinite">
                             <h2 class="payment-title mb-4">{{ $mode_paiement->mode }}</h2>
@@ -141,6 +141,12 @@
         const content = document.getElementById('content');
         const logoutBtn = document.getElementById('logoutBtn');
 
+        const dmoney=document.querySelector('#dmoney');
+        dmoney.addEventListener('click', (e) => {
+            e.preventDefault();
+            alert("D-money n'est pas encore disponible");
+        });
+
         toggleBtn.addEventListener('click', () => {
             sidebar.classList.toggle('hidden');
             content.classList.toggle('full-width');
@@ -193,6 +199,7 @@
         document.querySelectorAll('.card').forEach(card => {
             observer.observe(card);
         });
+        
     </script>
 </body>
 

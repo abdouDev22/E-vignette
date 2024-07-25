@@ -101,7 +101,7 @@
                                             <td>{{ $voiture->type }}</td>
                                             <td>{{ $achatVignette->Date->format('d/m/Y') }}</td>
                                             <td>{{ $achatVignette->modePaiement->mode }}</td> <!-- Afficher le nom du mode de paiement -->
-                                            <td>{{ $achatVignette->vignette->date }}</td> <!-- Afficher la description de la vignette -->
+                                            <td>{{ $achatVignette->vignette->date->format('Y') }}</td> <!-- Afficher la description de la vignette -->
                                             <td>{{ $achatVignette->prix }}</td>
                                         </tr>
                                     @empty
