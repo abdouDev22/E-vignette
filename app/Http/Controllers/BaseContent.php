@@ -101,42 +101,42 @@ class BaseContent extends Controller
      * Traite l'achat de la vignette
      */
     public function page_achat(AchatVignetteRequest $request, Voiture $voiture, Vignette $vignette, ModePaiement $modePaiement)
-    {
-        $user = ApiWaafi::where('tel', $request->phone)->first();
+{
+    $user = ApiWaafi::where('tel', $request->phone)->first();
 
-        // Vérifie si le compte est verrouillé
-        if ($this->vignetteService->isAccountLocked($user)) {
-            return $this->returnErrorView($voiture, $vignette, $modePaiement, __('account_locked'));
-        }
-
-        // Valide la transaction
-        if (!$this->vignetteService->isValidTransaction($user, $vignette, $voiture, $request->password)) {
-            $this->vignetteService->incrementFailedAttempts($user);
-            return $this->returnErrorView($voiture, $vignette, $modePaiement, __('invalid_credentials'));
-        }
-
-        $prix = $this->vignetteService->calculatePrice($voiture, $vignette);
-
-        // Vérifie si l'utilisateur a un solde suffisant
-        if ($user->solde < $prix) {
-            return $this->returnErrorView($voiture, $vignette, $modePaiement, __('insufficient_balance'));
-        }
-        // Traite la transaction
-        DB::beginTransaction();
-        try {
-            $this->vignetteService->processTransaction($user, $prix, $this->user->id, $voiture->id, $vignette->id, $modePaiement->id);
-            DB::commit();
-            $user = ApiWaafi::where('tel', $request->phone)->first();
-            $user_con_name=$user->nom;
-            $telephone=$request->phone;
-
-            return view('api.api_waafi_affiche', ['id_mode' => $modePaiement->id, 'prix'=> $prix,'user_con_name' => $user_con_name, 'telephone'=> $telephone, 'date'=>now()->toDateString()]);
-        } catch (\Exception $e) {
-            DB::rollBack();
-            \Log::error('La transaction a échoué: ' . $e->getMessage());
-            return $this->returnErrorView($voiture, $vignette, $modePaiement, __('transaction_failed'));
-        }
+    if ($this->vignetteService->isAccountLocked($user)) {
+        return $this->returnErrorView($voiture, $vignette, $modePaiement, __('account_locked'));
     }
+
+    if (!$this->vignetteService->isValidTransaction($user, $vignette, $voiture, $request->password)) {
+        $this->vignetteService->incrementFailedAttempts($user);
+        return $this->returnErrorView($voiture, $vignette, $modePaiement, __('invalid_credentials'));
+    }
+
+    $prix = $this->vignetteService->calculatePrice($voiture, $vignette);
+
+    if ($user->solde < $prix) {
+        return $this->returnErrorView($voiture, $vignette, $modePaiement, __('insufficient_balance'));
+    }
+
+    DB::beginTransaction();
+    try {
+        $achat = $this->vignetteService->processTransaction($user, $prix, $this->user->id, $voiture->id, $vignette->id, $modePaiement->id);
+        DB::commit();
+        $user = ApiWaafi::where('tel', $request->phone)->first();
+        $user_con_name = $user->nom;
+        $telephone = $request->phone;
+
+        return view('api.api_waafi_affiche', ['id_mode' => $modePaiement->id, 'prix'=> $prix,'user_con_name' => $user_con_name, 'telephone'=> $telephone, 'date'=>now()->toDateString()]);
+    } catch (\Exception $e) {
+        DB::rollBack();
+        \Log::error('Transaction failed: ' . $e->getMessage());
+        $errorMessage = $e->getMessage();
+        return $this->returnErrorView($voiture, $vignette, $modePaiement, $errorMessage);
+    }
+}
+
+
 
     /**
      * Méthode auxiliaire pour retourner la vue d'erreur
