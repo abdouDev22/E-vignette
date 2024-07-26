@@ -46,11 +46,11 @@
         </div>
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('welcome') }}"><i class="fas fa-home"></i> Home</a>
+                <a class="nav-link" href="{{ route('welcome') }}"><i class="fas fa-home"></i>Acceuil</a>
             </li>
            
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('achatVignette') }}"><i class="fas fa-shopping-bag"></i> Shop</a>
+                <a class="nav-link" href="{{ route('achatVignette') }}"><i class="fas fa-shopping-bag"></i> Acheter</a>
             </li>
         </ul>
        

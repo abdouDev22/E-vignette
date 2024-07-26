@@ -45,11 +45,11 @@
         </div>
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('welcome') }}"><i class="fas fa-home"></i> Home</a>
+                <a class="nav-link" href="{{ route('welcome') }}"><i class="fas fa-home"></i> Acceuill</a>
             </li>
            
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('achatVignette') }}"><i class="fas fa-shopping-bag"></i> Shop</a>
+                <a class="nav-link" href="{{ route('achatVignette') }}"><i class="fas fa-shopping-bag"></i> Achat</a>
             </li>
         </ul>
        
@@ -79,12 +79,12 @@
                 <div class="card payment-option animate__animated animate__fadeInLeft">
                     <div class="card-body text-center p-5">
                         @if ($mode_paiement->mode == 'D-money')
-                            <img src="{{ asset('img/dmoney.png') }}" alt="D-money" class="payment-icon animate__animated animate__pulse animate__infinite">
+                            <img src="{{ asset('img/2.png') }}" alt="D-money" class="payment-icon animate__animated animate__pulse animate__infinite">
                             <h2 class="payment-title mb-4">D-money</h2>
                             <p class="payment-text mb-4">Paiement rapide et sécurisé avec D-money</p>
                             <a href="#" class="btn btn-light btn-lg" id="dmoney">Choisir {{ $mode_paiement->mode }}</a>
                         @else
-                            <img src="{{ asset('img/waafi.png') }}" alt="Waafi" class="payment-icon animate__animated animate__pulse animate__infinite">
+                            <img src="{{ asset('img/1.png') }}" alt="Waafi" class="payment-icon animate__animated animate__pulse animate__infinite">
                             <h2 class="payment-title mb-4">{{ $mode_paiement->mode }}</h2>
                             <p class="payment-text mb-4">Paiement facile et instantané via {{ $mode_paiement->mode }}</p>
                             <a href="{{ route('codeqr', ['voiture' => $voiture, 'vignette' => $vignette, 'modePaiement' => $mode_paiement->id]) }}" class="btn btn-light btn-lg">Choisir {{ $mode_paiement->mode }}</a>
