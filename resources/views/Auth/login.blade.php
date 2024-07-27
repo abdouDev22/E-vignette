@@ -3,7 +3,7 @@
     
     <!-- Floating Image -->
     <div class="floating-image">
-        <img src="{{ asset('img/oo.png') }}" alt="Circular floating logo">
+        <img src="{{ asset('img/logo.jpg') }}" alt="Circular floating logo">
     </div>
 
 

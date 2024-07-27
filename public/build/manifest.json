@@ -1,6 +1,10 @@
 {
   "resources/css/app.css": {
+<<<<<<< HEAD
     "file": "assets/app-90505d55.css",
+=======
+    "file": "assets/app-fc19774e.css",
+>>>>>>> origin/E-vignette-CSS
     "isEntry": true,
     "src": "resources/css/app.css"
   },

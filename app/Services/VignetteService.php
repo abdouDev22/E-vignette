@@ -83,7 +83,13 @@ public function processTransaction($user, $prix, $userId, $id_voiture, $id_vigne
         $vignette=Vignette::findOrFail($id_vignette);
         $voiture= Voiture::findOrFail($id_voiture);
 
-        $qrContent = "Vignette: $vignette->date, User NNI: $user->NNIclient, Vehicle ID: $voiture->matricule, statuts: Valide ";
+        $qrContent = sprintf(
+            "Vignette: %s, User NNI: %s, Vehicle ID: %s, Status: Valide",
+            $vignette->date->format('Y'),
+            $user->NNIclient,
+            $voiture->matricule
+        );
+        
         $qrDir = public_path('qrcodes');
         $qrPath = $qrDir . '/' . time() . '.svg';
 
@@ -137,11 +143,5 @@ public function processTransaction($user, $prix, $userId, $id_voiture, $id_vigne
         throw new \Exception('Transaction failed: ' . $e->getMessage());
     }
 }
-
-
-
-
-
-
 
 }

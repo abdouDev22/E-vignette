@@ -105,7 +105,7 @@
                     <div class="col-md-4 text-center animate__animated animate__fadeIn animate__delay-3s">
                         <i class="fas fa-shield-alt fa-3x mb-3 text-primary"></i>
                         <h4>Garantie satisfaction</h4>
-                        <p>Remboursement sous 30 jours si vous n'êtes pas satisfait</p>
+                        <p>Pas de Remboursement qui tien</p>
                     </div>
                 </div>
             </main>
