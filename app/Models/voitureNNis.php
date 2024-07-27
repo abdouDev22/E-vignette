@@ -15,5 +15,6 @@ class voitureNNis extends Model
         'marque',
         'type',
         'NNIclient',
+        'chevaux',
     ];
 }

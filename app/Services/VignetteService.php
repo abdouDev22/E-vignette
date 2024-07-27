@@ -79,8 +79,11 @@ public function processTransaction($user, $prix, $userId, $id_voiture, $id_vigne
         if (!$user->save()) {
             throw new \Exception('Failed to update user data');
         }
+        $user = Auth::user();
+        $vignette=Vignette::findOrFail($id_vignette);
+        $voiture= Voiture::findOrFail($id_voiture);
 
-        $qrContent = "Vignette ID: $id_vignette, User ID: $userId, Vehicle ID: $id_voiture";
+        $qrContent = "Vignette: $vignette->date, User NNI: $user->NNIclient, Vehicle ID: $voiture->matricule, statuts: Valide ";
         $qrDir = public_path('qrcodes');
         $qrPath = $qrDir . '/' . time() . '.svg';
 
@@ -126,7 +129,7 @@ public function processTransaction($user, $prix, $userId, $id_voiture, $id_vigne
         $user = Auth::user();
         $vignette=Vignette::findOrFail($id_vignette);
         $voiture= Voiture::findOrFail($id_voiture);
-            Mail::to($user->email)->send(new TransactionComplete($achat, $qrPath,$vignette,$voiture));
+        Mail::to($user->email)->send(new TransactionComplete($achat, $qrPath,$vignette,$voiture));
         
 
         return $achat;

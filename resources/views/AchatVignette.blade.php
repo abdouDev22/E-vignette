@@ -1,88 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-  @vite(['resources/scss/style.scss','resources/js/app.js'])
-</head>
-<body>
-  <a href="{{ route('achatVignette') }}" class="home">retour</a>
-  <div class="content1">
-    <a class="sidebarbuuton a" href="#"></a>
-    <h1>Vignette Disponible</h1>
-    <div class="grid">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Animate.css -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <!-- DataTables CSS -->
+    <link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+   
+    <title>Dashboard</title>
 
-@foreach ($achatVignettes as $achatVignette)
-<div class="item">
-  
-  <a href="{{ route('service', ['voiture' => $voiture->id, 'vignette' => $achatVignette->id]) }}" class="lien">
-    <div class="item-content">
-      <span class="no1">{{ $achatVignette->date->format('Y') }}</span>
-      <span class="nb">prix :</span>
-      <span class="nb1">{{ $achatVignette->prix }}</span>
+    @vite(['resources/scss/sidebare.scss','resources/js/app.js'])
+</head><body>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container-fluid">
+            <button id="toggleSidebar" class="btn btn-outline-light me-2 toggle-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <a class="navbar-brand animate__animated animate__fadeIn" href="#">E-vignette</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('profile.edit') }}"><i class="fas fa-user"></i> Profile</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="sidebar" class="sidebar">
+        <div class="user-profile animate__animated animate__fadeIn">
+            <img src="{{ asset('img/dmoney.png') }}" alt="User Avatar" class="user-avatar">
+            <h5 class="user-name">{{ session('username') ?? 'Guest' }}</h5>
+
+        </div>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('welcome') }}"><i class="fas fa-home"></i> Acceuil</a>
+            </li>
+           
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('achatVignette') }}"><i class="fas fa-shopping-bag"></i> Achat</a>
+            </li>
+        </ul>
+       
+        <div class="mt-auto">
+        <a href="{{ route('logout') }}" class="btn btn-light logout-link mx-3" 
+           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
     </div>
-  </a>
-
-</div>
-@endforeach
-          
 
     </div>
-</div>
-<<div class="sideBarre a1">
-  <div class="f1"><svg  width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"/><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/><g id="SVGRepo_iconCarrier"> <path d="M10.0303 8.96965C9.73741 8.67676 9.26253 8.67676 8.96964 8.96965C8.67675 9.26255 8.67675 9.73742 8.96964 10.0303L10.9393 12L8.96966 13.9697C8.67677 14.2625 8.67677 14.7374 8.96966 15.0303C9.26255 15.3232 9.73743 15.3232 10.0303 15.0303L12 13.0607L13.9696 15.0303C14.2625 15.3232 14.7374 15.3232 15.0303 15.0303C15.3232 14.7374 15.3232 14.2625 15.0303 13.9696L13.0606 12L15.0303 10.0303C15.3232 9.73744 15.3232 9.26257 15.0303 8.96968C14.7374 8.67678 14.2625 8.67678 13.9696 8.96968L12 10.9393L10.0303 8.96965Z" fill="#1C274C"/> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 1.25C6.06294 1.25 1.25 6.06294 1.25 12C1.25 17.9371 6.06294 22.75 12 22.75C17.9371 22.75 22.75 17.9371 22.75 12C22.75 6.06294 17.9371 1.25 12 1.25ZM2.75 12C2.75 6.89137 6.89137 2.75 12 2.75C17.1086 2.75 21.25 6.89137 21.25 12C21.25 17.1086 17.1086 21.25 12 21.25C6.89137 21.25 2.75 17.1086 2.75 12Z" fill="#1C274C"/> </g></svg></div>
-  <div class="contenu">
-      
-    <a  class="abou">
-      <form method="POST" action="{{ route('logout') }}">
-      @csrf
-      <button class="link-button">Deconnexion</button>
-    </form>
+
+    <!-- Main content -->
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Vignette Disponible</h1>
+                </div>
+                @foreach ($achatVignettes as $achatVignette)
+                <!-- Vignette Card -->
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-6">
+                        <div class="card vignette-card animate__animated animate__fadeInUp">
+                            <div class="card-body text-center p-5">
+                                <i class="fas fa-car vignette-icon animate__animated animate__pulse animate__infinite"></i>
+                                <h2 class="vignette-title mb-4">Vignette {{ $achatVignette->date->format('Y') }}</h2>
+                                <p class="vignette-text mb-3">Accès illimité à toutes les routes et autoroutes</p>
+                                <p class="vignette-text mb-3">Valable pour une année entière</p>
+                                <p class="vignette-price mb-4">{{ $achatVignette->prix }}.DJF</p>
+                               
+                                <a href="{{ route('service', ['voiture' => $voiture->id, 'vignette' => $achatVignette->id]) }}" 
+                                class="btn btn-lg buy-button animate__animated animate__heartBeat animate__delay-2s"> achete </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+
+                <!-- Features -->
+                <div class="row mt-5">
+                    <div class="col-md-4 text-center animate__animated animate__fadeIn animate__delay-1s">
+                        <i class="fas fa-clock fa-3x mb-3 text-primary"></i>
+                        <h4>Validité d'un an</h4>
+                        <p>Profitez d'une année complète sans souci de renouvellement</p>
+                    </div>
+                    <div class="col-md-4 text-center animate__animated animate__fadeIn animate__delay-2s">
+                        <i class="fas fa-map-marked-alt fa-3x mb-3 text-primary"></i>
+                        <h4>Couverture nationale</h4>
+                        <p>Valable sur toutes les routes et autoroutes du pays</p>
+                    </div>
+                    <div class="col-md-4 text-center animate__animated animate__fadeIn animate__delay-3s">
+                        <i class="fas fa-shield-alt fa-3x mb-3 text-primary"></i>
+                        <h4>Garantie satisfaction</h4>
+                        <p>Remboursement sous 30 jours si vous n'êtes pas satisfait</p>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Back Button -->
+    <a href="{{ route('achatVignette') }}" class="btn btn-primary btn-lg back-button animate__animated animate__fadeInUp">
+        <i class="fas fa-arrow-left me-2"></i> Retour au Dashboard
     </a>
-      <a href="{{ route('welcome') }}" class="abou active">Acceuille</a>
-      <a href="{{ route('profile.edit') }}" class="abou">Profile</a>
-      <a href="{{ route('achatVignette') }}" class="abou">Achat de vignette</a>
-  </div>
 
 
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- DataTables -->
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+    <script>
+        const toggleBtn = document.getElementById('toggleSidebar');
+        const sidebar = document.getElementById('sidebar');
+        const content = document.getElementById('content');
+        const logoutBtn = document.getElementById('logoutBtn');
 
-<script src="https://cdn.jsdelivr.net/npm/muuri@0.9.5/dist/muuri.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/web-animations-js@2.3.2/web-animations.min.js"></script>
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('hidden');
+            content.classList.toggle('full-width');
+        });
 
-<script>
-    var grid = new Muuri('.grid', {
-dragEnabled: false,
-dragHandle: '.item-content', 
-layout: {
-fillGaps: false,
-horizontal: false,
-},
-layoutDuration: 500
-});
-    function cahersidebarre(){
-document.querySelector('.sideBarre').classList.add('a1');
-console.log('salut')
+        logoutBtn.addEventListener('click', () => {
+            alert('Logging out... Goodbye!');
+            // Here you would typically handle the logout process
+            // For example, redirecting to a logout page or clearing session data
+        });
 
-}
-function afficherSidebarre(){
-document.querySelector('.sideBarre').classList.remove('a1');
-console.log('au revoir')
+        // Initialize DataTable with search animation and custom styling
+        $(document).ready(function () {
+            $('#dataTable').DataTable({
+                "pageLength": 5,
+                "lengthChange": false,
+                "info": false,
+                "dom": '<"top"f>rt<"bottom"p><"clear">',
+                "language": {
+                    "search": "_INPUT_",
+                    "searchPlaceholder": "Search products..."
+                },
+                "initComplete": function () {
+                    var api = this.api();
+                    api.$('td').click(function () {
+                        api.search(this.innerHTML).draw();
+                    });
+                    $('.dataTables_filter input')
+                        .off('.DT')
+                        .on('input.DT', function () {
+                            api.search(this.value).draw();
+                        })
+                        .wrap('<div class="animate__animated animate__fadeIn"></div>');
+                },
+                "drawCallback": function () {
+                    $('tbody tr').addClass('animate__animated animate__fadeIn');
+                }
+            });
+        });
 
-}
+        // Add animation classes to elements as they come into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate__animated', 'animate__fadeIn');
+                }
+            });
+        }, { threshold: 0.1 });
 
-button= document.querySelector('.sidebarbuuton');
-button.addEventListener('click',()=>{
-afficherSidebarre();
-}) 
-
-
-
-button1=document.querySelector('.f1');
-button1.addEventListener('click',()=>{
-cahersidebarre();
-}) 
-</script>
+        document.querySelectorAll('.card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
 </body>
+
 </html>
+

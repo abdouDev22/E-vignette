@@ -1,97 +1,379 @@
-.sideBarre{
-  position: fixed;
-  box-shadow: 23px 10px 15px -3px rgba(0,0,0,0.1);
- 
-  width: 50%;
-  height: 100vh;
-  background-color: #0D3C48;
-  color: #fff;
- 
-  overflow: hidden;
-  
-  z-index: 20;
-  transition: 0.7s ease-in-out;
-  .contenu{
-    position: relative;
-    top: 20%;
-    height: 325px;
-    color: #fff;
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #0056b3;
+    --accent-color: #17a2b8;
+    --background-color: #f8f9fa;
+    --text-color: #333;
+    --white: #ffffff;
+            --card-bg: #f8f9fa;
+            --card-border: #e9ecef;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    overflow-x: hidden;
+}
+
+.navbar {
+    background-color: var(--primary-color);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.payment-image {
+    max-width: 150px;
+    max-height: 150px;
+    margin-bottom: 20px;
+}
+
+.navbar .nav-link {
+    color: white;
+    transition: all 0.3s;
+    border-radius: 5px;
+    margin: 5px 10px;
+}
+
+.navbar .nav-link:hover  {
+    color: #000000;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    color: white !important;
+}
+
+.sidebar {
+    height: 100vh;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 56px;
+    background-color: var(--secondary-color);
+    transition: all 0.5s;
+    z-index: 1000;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
-  }
-  .abou{
-    padding: 20px;
+}
+
+.sidebar.hidden {
+    transform: translateX(-100%);
+}
+
+.sidebar .nav-link {
+    color: white;
+    transition: all 0.3s;
+    border-radius: 5px;
+    margin: 5px 10px;
+}
+
+.sidebar .nav-link:hover {
+    background-color: var(--primary-color);
+    transform: translateX(5px);
+}
+
+.sidebar .nav-link i {
+    margin-right: 10px;
+    transition: all 0.3s;
+}
+
+.sidebar .nav-link:hover i {
+    transform: rotate(20deg);
+}
+
+.user-profile {
     text-align: center;
-    font-size: 1.3em;
-    color: #fff;
-    font-weight: bold;
-    text-decoration: none;
-   
-  }
-  .active{
-    color: #000;
-    background-color: #E8E8EC;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.user-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    border: 3px solid white;
+    transition: all 0.3s;
+}
+
+.user-avatar:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+.user-name {
+    color: white;
+    font-weight: 600;
+}
+
+.content {
+    margin-left: 250px;
+    padding: 80px 30px 30px;
+    transition: all 0.5s;
+}
+
+.content.full-width {
+    margin-left: 0;
+}
+
+.toggle-btn {
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.toggle-btn:hover {
+    transform: rotate(90deg);
+}
+
+.card {
+    border: none;
+    transition: all 0.3s;
+    margin-bottom: 20px;
+    background-color: white;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 123, 255, 0.1) !important;
+}
+
+.btn-primary  {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
     
-  }
-  .d{
-    border-bottom:#1e1e1e solid 3px;
-   
-  }
-  .t{
-    border-top:#1e1e1e solid 3px;
-  }
-  
-  .f1 {
+}
+
+
+
+.btn-primary:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+
+.logout-btn {
+    margin-top: auto;
+    margin-bottom: 20px;
+    
+}
+
+.mt-auto {
+    margin-top: auto;
+    margin-bottom: 20px;
+}
+
+
+
+.cart-badge {
     position: absolute;
-    top: 0%;
-    left: 28vw;
-    z-index: 10;
+    top: -5px;
+    right: -10px;
+    padding: 3px 6px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    color: white;
+    font-size: 0.7em;
+}
 
-    svg {
-      transform: none;
-      transition: 1s;
+#dataTable_filter {
+    margin-bottom: 1rem;
+}
 
-      path {
-        fill: #e22a0e;
-      }
+#dataTable_filter input {
+    border-radius: 20px;
+    border: 1px solid var(--primary-color);
+    padding: 8px 15px;
+    transition: all 0.3s;
+    width: 250px;
+}
 
-      &:hover {
-        transform: rotate(90deg);
-      }
+#dataTable_filter input:focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    outline: none;
+    width: 300px;
+}
+
+#dataTable {
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+#dataTable thead th {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 15px;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    letter-spacing: 1px;
+}
+
+#dataTable tbody tr {
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+}
+
+#dataTable tbody tr:hover {
+    transform: scale(1.02);
+    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.2);
+}
+
+#dataTable td {
+    padding: 20px;
+    border: none;
+    vertical-align: middle;
+}
+
+#dataTable tbody tr td:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+#dataTable tbody tr td:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.dataTables_paginate .paginate_button {
+    border-radius: 20px !important;
+    padding: 5px 15px !important;
+    margin: 0 5px !important;
+}
+
+.dataTables_paginate .paginate_button.current {
+    background: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    color: white !important;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
     }
-  }
+
+    .sidebar.hidden {
+        transform: translateX(0);
+    }
+
+    .content {
+        margin-left: 0;
+    }
 }
-.a1{
-  width: 0%;
+
+
+.back-btn-container {
+    position: relative; /* Utilisez fixed pour le maintenir en place même lors du défilement */
+    bottom: 330px;   /* Distance depuis le bas de l'écran */
+    right: 0px;     /* Distance depuis le bord droit de l'écran */
+    z-index: 1000;   /* Assurez-vous que le bouton est au-dessus des autres éléments */
 }
-.a{
-  position: fixed;
-  display: block;
-  border: 2px solid #1e1e1e;
-  border-radius: 10px;
-  height: 70px;
-  width: 100px;
-  margin-left: 10px;
-  margin-top: 20px;
-  overflow: hidden;
-  transition: 0.5s;
-  &::before{
-    content: "";
-    position: absolute;
-    top: 20px;
-    background-color: #1e1e1e;
-    width: 100px;
-    height: 3px;
-    transform: translate(0,0);
-  }
-  &::after{
-    content: "";
-    position: absolute;
+
+
+
+.abou-back{
+
+    position: relative; /* Utilisez fixed pour le maintenir en place même lors du défilement */
+    bottom: 860px;   /* Distance depuis le bas de l'écran */
+    left: 58em;     /* Distance depuis le bord droit de l'écran */
+    z-index: 1000;   /* Assurez-vous que le bouton est au-dessus des autres éléments */
+
+}
+
+
+.main-content {
+    padding: 20px;
+    position: relative;
     top: 40px;
-    background-color: #1e1e1e;
-    width: 100px;
-    height: 3px;
-    transform: rotate(0deg);
-  }
+}
+.vignette-card {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    
+}
+.vignette-card:hover {
+    transform: translateY(-10px) rotate(2deg);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+.vignette-icon {
+    font-size: 5rem;
+    color: var(--white);
+    margin-bottom: 20px;
+}
+.vignette-title {
+    color: var(--white);
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+.vignette-text {
+    color: var(--white);
+    font-size: 1.2rem;
+}
+.vignette-price {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #f1c40f;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+.buy-button {
+    background-color: #2ecc71;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+.buy-button:hover {
+    background-color: #27ae60;
+    transform: scale(1.05);
+}
+.back-button {
+    position: relative;
+    bottom: 760px;
+    left: 57em;
+    z-index: 1000;
+}
+
+
+
+.payment-option {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.payment-option:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+.payment-icon {
+    
+    max-width: 150px;
+    max-height: 150px;
+    margin-bottom: 20px
+}
+.payment-title {
+    color: var(--white);
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+.payment-text {
+    color: var(--white);
+    font-size: 1rem;
+}
+
+.payment-image {
+    max-width: 150px;
+    max-height: 150px;
+    margin-bottom: 20px;
 }
