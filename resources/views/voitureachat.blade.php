@@ -67,7 +67,7 @@
 
     <main id="content" class="content">
     <div class="container">
-        <h1 class="mb-4 animate__animated animate__fadeInDown">Welcome, {{ session('username', 'Guest') }}!</h1>
+        
         <div class="row">
             <div class="col-md-12 mb-4">
                 <div class="card shadow-sm animate__animated animate__fadeInUp">

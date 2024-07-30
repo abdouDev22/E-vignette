@@ -71,19 +71,22 @@
                     <h1 class="h2">Vignette Disponible</h1>
                 </div>
                 @foreach ($achatVignettes as $achatVignette)
-                <!-- Vignette Card -->
+                  <!-- Vignette Card -->
+
                 <div class="row justify-content-center">
                     <div class="col-md-8 col-lg-6">
                         <div class="card vignette-card animate__animated animate__fadeInUp">
                             <div class="card-body text-center p-5">
                                 <i class="fas fa-car vignette-icon animate__animated animate__pulse animate__infinite"></i>
                                 <h2 class="vignette-title mb-4">Vignette {{ $achatVignette->date->format('Y') }}</h2>
-                                <p class="vignette-text mb-3">Accès illimité à toutes les routes et autoroutes</p>
                                 <p class="vignette-text mb-3">Valable pour une année entière</p>
-                                <p class="vignette-price mb-4">{{ $achatVignette->prix }}.DJF</p>
-                               
+                                <p class="vignette-price mb-2">Prix original: {{ number_format($achatVignette->originalPrice, 2) }} DJF</p>
+                                @if($applyPenalty)
+                                    <p class="vignette-price mb-2 text-danger">Prix avec pénalité: {{ number_format($achatVignette->penalizedPrice, 2) }} DJF</p>
+                                    <p class="vignette-text mb-4"><small>(Pénalité de 10% appliquée après le 30 avril)</small></p>
+                                @endif
                                 <a href="{{ route('service', ['voiture' => $voiture->id, 'vignette' => $achatVignette->id]) }}" 
-                                class="btn btn-lg buy-button animate__animated animate__heartBeat animate__delay-2s"> achete </a>
+                                class="btn btn-lg buy-button animate__animated animate__heartBeat animate__delay-2s">Acheter</a>
                             </div>
                         </div>
                     </div>
@@ -102,11 +105,7 @@
                         <h4>Couverture nationale</h4>
                         <p>Valable sur toutes les routes et autoroutes du pays</p>
                     </div>
-                    <div class="col-md-4 text-center animate__animated animate__fadeIn animate__delay-3s">
-                        <i class="fas fa-shield-alt fa-3x mb-3 text-primary"></i>
-                        <h4>Garantie satisfaction</h4>
-                        <p>Pas de Remboursement qui tien</p>
-                    </div>
+                    
                 </div>
             </main>
         </div>

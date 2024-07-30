@@ -35,15 +35,22 @@ class VignetteService
     }
 }
 
-    public function adjustPrices($vignettes, $voiture)
+public function adjustPrices($vignettes, $voiture, $applyPenalty = true)
 {
-    // Implement the logic to adjust prices based on the voiture
-    // For example:
-    return $vignettes->map(function ($vignette) use ($voiture) {
-        $vignette->prix = $this->calculateAdjustedPrice($vignette, $voiture);
+    $currentDate = now();
+    $penaltyDate = $currentDate->copy()->setMonth(4)->setDay(30);
+
+    return $vignettes->map(function ($vignette) use ($voiture, $applyPenalty, $currentDate, $penaltyDate) {
+        $originalPrice = $this->calculateAdjustedPrice($vignette, $voiture);
+        $penalizedPrice = $applyPenalty && $currentDate->greaterThan($penaltyDate) ? $this->applyPenalty($originalPrice) : $originalPrice;
+        $vignette->originalPrice = $originalPrice;
+        $vignette->penalizedPrice = $penalizedPrice;
         return $vignette;
     });
 }
+
+
+
 
 
 private function calculateAdjustedPrice($vignette, $voiture)
@@ -62,6 +69,12 @@ public function calculatePrice(Voiture $voiture, Vignette $vignette)
     $basePrice = $vignette->prix;
     $adjustment = $voiture->chevaux * 100; // Adjust price based on horsepower
     return $basePrice + $adjustment;
+}
+
+
+public function applyPenalty($price, $penaltyPercentage = 10)
+{
+    return $price * (1 + $penaltyPercentage / 100);
 }
 
 

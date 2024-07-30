@@ -83,9 +83,13 @@ class BaseContent extends Controller
     public function vignette(Voiture $voiture)
     {
         $achatVignettes = Vignette::select('id', 'date', 'prix')->get();
-        $achatVignettes = $this->vignetteService->adjustPrices($achatVignettes, $voiture);
-        return view('achatvignette', compact('achatVignettes', 'voiture'));
+        $achatVignettes = $this->vignetteService->adjustPrices($achatVignettes, $voiture, true);
+        $applyPenalty = now()->greaterThan(now()->setMonth(4)->setDay(30));
+        return view('achatvignette', compact('achatVignettes', 'voiture', 'applyPenalty'));
     }
+    
+    
+    
 
     /**
      * Affiche la page de sélection du service

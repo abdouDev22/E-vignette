@@ -334,8 +334,8 @@ body {
     transform: scale(1.05);
 }
 .back-button {
-    position: relative;
-    bottom: 760px;
+    position: absolute;
+    bottom: 500px;
     left: 57em;
     z-index: 1000;
 }

@@ -1,0 +1,232 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  background: url(../../public/img/bg.jpg);
+  background-size: cover;
+  background-position: center;
+  color: #333; /* Couleur du texte sombre pour une meilleure lisibilité */
+  font-family: Aquire;
+}
+
+body ul li {
+  list-style: none;
+}
+
+body a {
+  text-decoration: none;
+  color: #333; /* Couleur du lien sombre pour correspondre au texte */
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.container .loader {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  color: #999; /* Couleur grise claire pour le texte du loader */
+}
+
+.container .loader h1 {
+  font-size: 250px;
+  font-family: Cosi Azure;
+  position: absolute;
+  top: -50px;
+  left: -500px;
+}
+
+.container .loader h2 {
+  font-size: 250px;
+  font-family: Cosi Azure;
+  position: absolute;
+  bottom: -70px;
+  right: -130px;
+}
+
+.container img {
+  width: 200px;
+}
+
+.container nav {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  padding: 20px 0px;
+}
+
+.container nav .logo {
+  padding: 0px 25px;
+}
+
+.container nav .logo span {
+  display: inline-block;
+  font-size: 45px;
+  font-family: Infected;
+  text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.6); /* Ombre blanche légère */
+}
+
+.container nav .menu ul li {
+  display: inline-block;
+}
+
+.container nav .menu ul li a {
+  padding: 10px 20px;
+  width: 50px;
+  font-size: 20px;
+  text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.6); /* Ombre blanche légère */
+  transition: all 0.3s ease;
+}
+
+.container nav .menu ul li a::before {
+  content: '';
+  position: absolute;
+  bottom: -03px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: #333;
+  transition: all 0.3s ease;
+}
+
+.container nav .menu ul li a:hover::before {
+  width: 100%;
+  left: 0;
+}
+
+.container .wrapper {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  padding: 20px;
+  padding-top: 30px;
+}
+
+.container .wrapper .content .h1 {
+  width: 100%;
+  overflow: hidden;
+}
+
+.container .wrapper .content .h1 h1 {
+  font-size: 130px;
+  line-height: 90%;
+  text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.6); /* Ombre blanche légère */
+}
+
+.container .wrapper .content p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 17px;
+  line-height: 109%;
+  width: 70%;
+  padding-top: 20px;
+}
+
+.container .wrapper .content a {
+  display: inline-block;
+  border: 3px solid #333;
+  border-radius: 19px;
+  padding: 7px 20px;
+  font-size: 19px;
+  margin: 30px 0px;
+  color: #333;
+  text-shadow: none;
+  transition: .5s;
+}
+
+.container .wrapper .content a:hover {
+  background: #333;
+  border: 3px solid #333;
+  color: #fff;
+}
+
+.container .wrapper .content .social ul li {
+  display: inline-block;
+}
+
+.container .wrapper .content .social ul li a {
+  padding: 0px 10px;
+  border-radius: 0px;
+  border: none;
+  border-right: 3px solid #333;
+}
+
+.container .wrapper .img {
+  width: 100%;
+  position: relative;
+  margin-left: 35px;
+}
+
+.container .wrapper .img .subimg {
+  width: 86%;
+  height: 360px;
+  background: #fff;
+  position: absolute;
+  margin: 10px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1); /* Ombre plus légère */
+  overflow: hidden;
+}
+
+.container .wrapper .img .subimg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.container .wrapper .img .subimg.one .bg {
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8); /* Couleur de fond claire */
+  position: absolute;
+  z-index: 9;
+  top: 0;
+}
+
+.container .wrapper .img .subimg.two {
+  width: 64%;
+  height: 250px;
+  top: 120px;
+  position: absolute;
+  left: -50px;
+}
+
+.container .wrapper .img .subimg.two .bg2 {
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8); /* Couleur de fond claire */
+  position: absolute;
+  z-index: 9;
+  top: 0;
+}
+
+.container .wrapper .img .subimg.three {
+  width: 40%;
+  height: 170px;
+  bottom: 50px;
+  position: absolute;
+  right: 130px;
+  top: 210px;
+}
+
+.container .wrapper .img .subimg.three .bg3 {
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8); /* Couleur de fond claire */
+  position: absolute;
+  z-index: 9;
+  top: 0;
+}
+
+/*# sourceMappingURL=style.css.map */

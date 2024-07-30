@@ -30,6 +30,7 @@
         "esbuild": "^0.18.20",
         "follow-redirects": "^1.15.6",
         "form-data": "^4.0.0",
+        "gsap": "^3.12.5",
         "mime-db": "^1.52.0",
         "mime-types": "^2.1.35",
         "muuri": "^0.9.5",
