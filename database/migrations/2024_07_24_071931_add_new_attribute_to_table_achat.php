@@ -27,7 +27,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('achat', function (Blueprint $table) {
-            $table->dropColumn('id_client');
+            $table->integer('id_client')->after('prix');
             //
         });
     }
