@@ -2,9 +2,7 @@
     <!-- Session Status -->
     
     <!-- Floating Image -->
-    <div class="floating-image">
-        <img src="{{ asset('img/logo.jpg') }}" alt="Circular floating logo">
-    </div>
+  
 
 
     <form method="POST" action="{{ route('login') }}">

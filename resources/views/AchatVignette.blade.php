@@ -70,7 +70,13 @@
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">Vignette Disponible</h1>
                 </div>
-                @foreach ($achatVignettes as $achatVignette)
+                @if(isset($message))
+    <div class="alert alert-info">
+        {{ $message }}
+    </div>
+@else
+    <!-- Your existing code for displaying available vignettes -->
+    @foreach ($achatVignettes as $achatVignette)
                   <!-- Vignette Card -->
 
                 <div class="row justify-content-center">
@@ -92,6 +98,9 @@
                     </div>
                 </div>
                 @endforeach
+@endif
+
+                
 
                 <!-- Features -->
                 <div class="row mt-5">

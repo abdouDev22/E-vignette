@@ -82,11 +82,38 @@ class BaseContent extends Controller
      */
     public function vignette(Voiture $voiture)
     {
-        $achatVignettes = Vignette::select('id', 'date', 'prix')->get();
-        $achatVignettes = $this->vignetteService->adjustPrices($achatVignettes, $voiture, true);
-        $applyPenalty = now()->greaterThan(now()->setMonth(4)->setDay(30));
-        return view('achatvignette', compact('achatVignettes', 'voiture', 'applyPenalty'));
+        $achatExistant = Achat::where('id_voiture', $voiture->id)
+            ->whereYear('created_at', now()->year)
+            ->first();
+    
+        if ($achatExistant) {
+            return view('AchatVignette', [
+                'voiture' => $voiture,
+                'achatVignettes' => [],
+                'message' => 'La vignette pour cette voiture a déjà été achetée cette année.',
+            ]);
+        } else {
+            $achatVignettes = Vignette::select('id', 'date', 'prix')
+    ->whereYear('date', now()->year)
+    ->get();
+
+            
+            $achatVignettes = $this->vignetteService->adjustPrices($achatVignettes, $voiture, true);
+            
+            $applyPenalty = now()->greaterThan(now()->setMonth(4)->setDay(30));
+            
+            return view('AchatVignette', [
+                'voiture' => $voiture,
+                'achatVignettes' => $achatVignettes,
+                'applyPenalty' => $applyPenalty
+            ]);
+        }
     }
+    
+
+    
+    
+
     
     
     
